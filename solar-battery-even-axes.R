@@ -1,10 +1,14 @@
 options(tidyverse.quiet = TRUE)
+library(scales)
 library(tidyverse)
 library(ggrepel)
+library(owidapi)
+library(robustbase)
+library(broom)
 
 theme_set(theme_grey(base_size = 12))
 
-decimal_labels <- scales::label_comma(drop0trailing = TRUE)
+decimal_labels <- label_comma(drop0trailing = TRUE)
 
 decade_breaks <- function(x) {
     10^seq(floor(log10(min(x))), ceiling(log10(max(x))))
@@ -13,7 +17,7 @@ decade_breaks <- function(x) {
 # Robust linear regression is my go-to, but least squares is more standard. It
 # doesn't seem to matter for photovoltaic, but for batteries, it matters a lot,
 # so doing both
-fit_methods <- list(least_squares = lm, robust = robustbase::lmrob)
+fit_methods <- list(least_squares = lm, robust = lmrob)
 
 # Wright's law: log10(price) = intercept + slope * log10(cumulative_production)
 fit_wrights_law <- function(data, method) {
@@ -46,7 +50,7 @@ plot_wrights_law <- function(data) {
 # x axis: MW
 # y axis: price in 2025 USD per watt
 solar <-
-    owidapi::owid_get("solar-pv-prices-vs-cumulative-capacity") |>
+    owid_get("solar-pv-prices-vs-cumulative-capacity") |>
     select(year, price = cost, cumulative_production = cumulative_capacity) |>
     mutate(cumulative_production = cumulative_production / 1000) |> # MW to GW
     drop_na()
@@ -57,7 +61,7 @@ solar <-
 # x axis: GWh
 # y axis: 2024 USD per kWh
 battery <-
-    owidapi::owid_get("battery-price-vs-cumulative-production") |>
+    owid_get("battery-price-vs-cumulative-production") |>
     select(year, price, cumulative_production) |>
     drop_na()
 
@@ -93,7 +97,7 @@ fits |>
 # One row per coefficient; the learning rate only means something for the slope
 fits |>
     rowwise(series, method) |>
-    reframe(broom::tidy(fit)) |>
+    reframe(tidy(fit)) |>
     mutate(
         learning_rate = if_else(term == "(Intercept)", NA, 1 - 2^estimate)
     ) |>
