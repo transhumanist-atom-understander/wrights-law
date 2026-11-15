@@ -27,11 +27,7 @@ read_owid <- function(chart) {
 # Wright's law: log10(price) = intercept + slope * log10(cumulative_production)
 # MM-estimation keeps outlying years, even at the ends, from steering the line
 fit_wrights_law <- function(data) {
-    MASS::rlm(
-        log10(price) ~ log10(cumulative_production),
-        data = data,
-        method = "MM"
-    )
+    robustbase::lmrob(log10(price) ~ log10(cumulative_production), data = data)
 }
 
 plot_wrights_law <- function(data, fit) {
@@ -65,6 +61,7 @@ battery <-
     select(year, price, cumulative_production) |>
     drop_na()
 
+set.seed(1) # lmrob() starts from random subsamples
 solar_fit <- fit_wrights_law(solar)
 battery_fit <- fit_wrights_law(battery)
 
