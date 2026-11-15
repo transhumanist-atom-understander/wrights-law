@@ -1,3 +1,9 @@
+I'm addressing my fellow devotees of the god of straight lines on graphs, and I'm telling you to stop jumping to the end of the trend line.
+Just because solar and battery prices are decreasing doesn't mean we will inevitably use solar and battery for everything.
+When you look at the actual slope of the decrease, you'll see the massive efforts it takes to decrease the price.
+When you want to do futurism, you have to consider not only what will happen eventually holding everything else constant, but what will happen first.
+When you do that you'll see in particular that nuclear is not out of the game.
+
 ## Solar Wright's law plot
 
 Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity), plotting the price of solar power as a function of cumulative capacity:
