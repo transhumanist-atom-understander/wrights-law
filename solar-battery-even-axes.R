@@ -25,25 +25,20 @@ read_owid <- function(chart) {
 }
 
 # Wright's law: log10(price) = intercept + slope * log10(cumulative_production)
+# MM-estimation keeps outlying years, even at the ends, from steering the line
 fit_wrights_law <- function(data) {
-    lm(log10(price) ~ log10(cumulative_production), data = data) |>
-        coef() |>
-        set_names("intercept", "slope") |>
-        as_tibble_row()
+    MASS::rlm(
+        log10(price) ~ log10(cumulative_production),
+        data = data,
+        method = "MM"
+    )
 }
 
-# On log scales geom_smooth() fits the same line as fit_wrights_law()
-plot_wrights_law <- function(data) {
+plot_wrights_law <- function(data, fit) {
     ggplot(data, aes(cumulative_production, price)) +
         geom_point() +
         geom_text_repel(aes(label = year), max.overlaps = Inf) +
-        geom_smooth(
-            method = "lm",
-            formula = y ~ x,
-            se = FALSE,
-            colour = "black",
-            linewidth = 1
-        ) +
+        geom_line(aes(y = 10^fitted(fit)), linewidth = 1) +
         scale_x_log10(breaks = decade_breaks, labels = decimal_labels) +
         scale_y_log10(breaks = decade_breaks, labels = decimal_labels) +
         coord_fixed(
@@ -70,12 +65,15 @@ battery <-
     select(year, price, cumulative_production) |>
     drop_na()
 
+solar_fit <- fit_wrights_law(solar)
+battery_fit <- fit_wrights_law(battery)
+
 solar_plot <-
-    plot_wrights_law(solar) +
+    plot_wrights_law(solar, solar_fit) +
     labs(x = "Cumulative capacity (GW)", y = "Module cost\n(2025 US$/W)")
 
 battery_plot <-
-    plot_wrights_law(battery) +
+    plot_wrights_law(battery, battery_fit) +
     labs(
         x = "Cumulative production (GWh)",
         y = "Battery cell price\n(2024 US$/kWh)"
@@ -84,8 +82,9 @@ battery_plot <-
 ggsave("solar_wrights_law.png", solar_plot, width = 10, height = 5)
 ggsave("battery_wrights_law.png", battery_plot, width = 11, height = 4)
 
-list(solar = solar, battery = battery) |>
-    map(fit_wrights_law) |>
+list(solar = solar_fit, battery = battery_fit) |>
+    map(\(fit) as_tibble_row(coef(fit))) |>
     list_rbind(names_to = "series") |>
+    rename(intercept = `(Intercept)`, slope = `log10(cumulative_production)`) |>
     mutate(learning_rate = 1 - 2^slope) |>
     write_csv("line_fit_parameters.csv")
