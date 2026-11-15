@@ -29,10 +29,25 @@ geom_fit <- function(fit) {
     geom_line(aes(y = 10^fitted(fit)), linewidth = 1)
 }
 
+# A blank label draws nothing, but its point still pushes the other labels away,
+# which it wouldn't if the label layer only got the labelled years
+label_every_fifth_year <- function(year) {
+    if_else(year %% 5 == 0, as.character(year), "")
+}
+
 plot_wrights_law <- function(data) {
     ggplot(data, aes(cumulative_production, price)) +
         geom_point() +
-        geom_text_repel(aes(label = year), max.overlaps = Inf, max.time = Inf) +
+        geom_text_repel(
+            aes(label = label_every_fifth_year(year)),
+            # Start the labels a third of a decade below and to the left of
+            # their points, where a falling trend leaves room
+            nudge_x = -0.35,
+            nudge_y = -0.35,
+            min.segment.length = 0,
+            max.overlaps = Inf,
+            max.time = Inf
+        ) +
         scale_x_log10(breaks = decade_breaks, labels = decimal_labels) +
         scale_y_log10(breaks = decade_breaks, labels = decimal_labels) +
         coord_fixed(
