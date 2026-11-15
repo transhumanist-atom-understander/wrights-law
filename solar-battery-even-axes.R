@@ -24,17 +24,23 @@ read_owid <- function(chart) {
         )
 }
 
+# The robust MM-estimate keeps outlying years from steering the line
+fit_methods <- list(least_squares = lm, robust = robustbase::lmrob)
+
 # Wright's law: log10(price) = intercept + slope * log10(cumulative_production)
-# MM-estimation keeps outlying years, even at the ends, from steering the line
-fit_wrights_law <- function(data) {
-    robustbase::lmrob(log10(price) ~ log10(cumulative_production), data = data)
+fit_wrights_law <- function(data, method) {
+    fit <- fit_methods[[method]]
+    fit(log10(price) ~ log10(cumulative_production), data = data)
 }
 
-plot_wrights_law <- function(data, fit) {
+geom_fit <- function(fit) {
+    geom_line(aes(y = 10^fitted(fit)), linewidth = 1)
+}
+
+plot_wrights_law <- function(data) {
     ggplot(data, aes(cumulative_production, price)) +
         geom_point() +
-        geom_text_repel(aes(label = year), max.overlaps = Inf) +
-        geom_line(aes(y = 10^fitted(fit)), linewidth = 1) +
+        geom_text_repel(aes(label = year), max.overlaps = Inf, max.time = Inf) +
         scale_x_log10(breaks = decade_breaks, labels = decimal_labels) +
         scale_y_log10(breaks = decade_breaks, labels = decimal_labels) +
         coord_fixed(
@@ -61,27 +67,43 @@ battery <-
     select(year, price, cumulative_production) |>
     drop_na()
 
-set.seed(1) # lmrob() starts from random subsamples
-solar_fit <- fit_wrights_law(solar)
-battery_fit <- fit_wrights_law(battery)
-
 solar_plot <-
-    plot_wrights_law(solar, solar_fit) +
+    plot_wrights_law(solar) +
     labs(x = "Cumulative capacity (GW)", y = "Module cost\n(2025 US$/W)")
 
 battery_plot <-
-    plot_wrights_law(battery, battery_fit) +
+    plot_wrights_law(battery) +
     labs(
         x = "Cumulative production (GWh)",
         y = "Battery cell price\n(2024 US$/kWh)"
     )
 
-ggsave("solar_wrights_law.png", solar_plot, width = 10, height = 5)
-ggsave("battery_wrights_law.png", battery_plot, width = 11, height = 4)
+set.seed(1) # lmrob() starts from random subsamples
+fits <-
+    tribble(
+        ~series,   ~data,   ~plot,        ~width, ~height,
+        "solar",   solar,   solar_plot,   10,     5,
+        "battery", battery, battery_plot, 11,     4
+    ) |>
+    expand_grid(method = names(fit_methods)) |>
+    mutate(fit = map2(data, method, fit_wrights_law))
 
-list(solar = solar_fit, battery = battery_fit) |>
-    map(\(fit) as_tibble_row(coef(fit))) |>
-    list_rbind(names_to = "series") |>
-    rename(intercept = `(Intercept)`, slope = `log10(cumulative_production)`) |>
+fits |>
+    mutate(
+        filename = str_glue("{series}_wrights_law_{method}.png"),
+        plot = map2(plot, fit, \(plot, fit) plot + geom_fit(fit))
+    ) |>
+    select(filename, plot, width, height) |>
+    pwalk(ggsave)
+
+fits |>
+    mutate(coefficients = map(fit, coef)) |>
+    unnest_wider(coefficients) |>
+    select(
+        series,
+        method,
+        intercept = `(Intercept)`,
+        slope = `log10(cumulative_production)`
+    ) |>
     mutate(learning_rate = 1 - 2^slope) |>
     write_csv("line_fit_parameters.csv")
