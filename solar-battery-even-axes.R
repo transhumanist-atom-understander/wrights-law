@@ -40,6 +40,11 @@ plot_wrights_law <- function(data) {
         geom_point() +
         geom_text_repel(
             aes(label = label_every_fifth_year(year)),
+            # Start the labels a third of a decade below and to the left of
+            # their points, where a falling trend leaves room
+            nudge_x = -0.35,
+            nudge_y = -0.35,
+            min.segment.length = 0,
             max.overlaps = Inf,
             max.time = Inf
         ) +
