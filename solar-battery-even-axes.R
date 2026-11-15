@@ -10,20 +10,6 @@ decade_breaks <- function(x) {
     10^seq(floor(log10(min(x))), ceiling(log10(max(x))))
 }
 
-read_owid <- function(chart) {
-    str_glue(
-        "https://ourworldindata.org/grapher/{chart}.csv",
-        "?v=1&csvType=full&useColumnShortNames=true"
-    ) |>
-        read_csv(
-            col_types = cols(
-                entity = col_character(),
-                code = col_character(),
-                .default = col_double()
-            )
-        )
-}
-
 # Robust linear regression is my go-to, but least squares is more standard. It
 # doesn't seem to matter for photovoltaic, but for batteries, it matters a lot,
 # so doing both
@@ -60,7 +46,7 @@ plot_wrights_law <- function(data) {
 # x axis: MW
 # y axis: price in 2025 USD per watt
 solar <-
-    read_owid("solar-pv-prices-vs-cumulative-capacity") |>
+    owidapi::owid_get("solar-pv-prices-vs-cumulative-capacity") |>
     select(year, price = cost, cumulative_production = cumulative_capacity) |>
     mutate(cumulative_production = cumulative_production / 1000) |> # MW to GW
     drop_na()
@@ -71,7 +57,7 @@ solar <-
 # x axis: GWh
 # y axis: 2024 USD per kWh
 battery <-
-    read_owid("battery-price-vs-cumulative-production") |>
+    owidapi::owid_get("battery-price-vs-cumulative-production") |>
     select(year, price, cumulative_production) |>
     drop_na()
 
@@ -104,14 +90,11 @@ fits |>
     select(filename, plot, width, height) |>
     pwalk(ggsave)
 
+# One row per coefficient; the learning rate only means something for the slope
 fits |>
-    mutate(coefficients = map(fit, coef)) |>
-    unnest_wider(coefficients) |>
-    select(
-        series,
-        method,
-        intercept = `(Intercept)`,
-        slope = `log10(cumulative_production)`
+    rowwise(series, method) |>
+    reframe(broom::tidy(fit)) |>
+    mutate(
+        learning_rate = if_else(term == "(Intercept)", NA, 1 - 2^estimate)
     ) |>
-    mutate(learning_rate = 1 - 2^slope) |>
     write_csv("line_fit_parameters.csv")
