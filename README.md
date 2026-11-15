@@ -12,11 +12,20 @@ Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulati
 I've made sure that orders of magnitude are the same size on the x and y axes, so we can get a visual sense of the relationship.
 
 The slope is about -0.4.
-This means that for every order of magnitude scaleup in solar capacity, we get 0.4 orders of magnitude drop in price—the line goes down by more than a third, but less than half, of one of these grid boxes.
 
-There's a way to describe this is the learning rate: when cumulative capacity doubles, price reduces by 24%.
+This would be very simple to interpret if it was -1/3 or -1/2, but it's annoyingly in between.
+If it was -1/3, that would mean that on the plot, you would move three boxes to the right to go down a box.
+Meaning, you need three orders of magnitude scale-up to achieve one order of magnitude price reduction.
+So a 10x reduction in price would require producing 1000x as many solar panels as have ever been produced.
 
-My preferred way to describe it is to target a price reduction and to ask what scale-up of cumulative capacity is required.
-In this case, a 10x reduction and price requires about a 300x scale-up of cumulative capacity.
+If the slope was -1/2, then a 10x reduction in price would require a 100x scale-up of production.
+The denominator is the number of zeros.
+
+It's in between... with a slope of -0.4, a 10x reduction in price requires a scaleup of about 300x in cumulative capacity.
 
 ## Battery Wright's law plot
+
+Solar is already so cheap that we would be using it for everything if we could easily store and transmit it.
+What has really unlocked a solar revolution in recent years is not just solar but batteries.
+
+
