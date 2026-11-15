@@ -2,7 +2,7 @@ options(tidyverse.quiet = TRUE)
 library(tidyverse)
 library(ggrepel)
 
-theme_set(theme_grey(base_size = 18))
+theme_set(theme_grey(base_size = 12))
 
 decimal_labels <- scales::label_comma(drop0trailing = TRUE)
 
@@ -24,7 +24,9 @@ read_owid <- function(chart) {
         )
 }
 
-# The robust MM-estimate keeps outlying years from steering the line
+# Robust linear regression is my go-to, but least squares is more standard. It
+# doesn't seem to matter for photovoltaic, but for batteries, it matters a lot,
+# so doing both
 fit_methods <- list(least_squares = lm, robust = robustbase::lmrob)
 
 # Wright's law: log10(price) = intercept + slope * log10(cumulative_production)
@@ -54,6 +56,9 @@ plot_wrights_law <- function(data) {
 
 # OWID series: Solar PV module prices vs. cumulative capacity, World
 # https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity
+# As of November 15 2026:
+# x axis: MW
+# y axis: price in 2025 USD per watt
 solar <-
     read_owid("solar-pv-prices-vs-cumulative-capacity") |>
     select(year, price = cost, cumulative_production = cumulative_capacity) |>
@@ -62,6 +67,9 @@ solar <-
 
 # OWID series: Price of lithium-ion battery cells vs. cumulative production, World
 # https://ourworldindata.org/grapher/battery-price-vs-cumulative-production
+# As of November 15, 2026:
+# x axis: GWh
+# y axis: 2024 USD per kWh
 battery <-
     read_owid("battery-price-vs-cumulative-production") |>
     select(year, price, cumulative_production) |>
@@ -82,8 +90,8 @@ set.seed(1) # lmrob() starts from random subsamples
 fits <-
     tribble(
         ~series,   ~data,   ~plot,        ~width, ~height,
-        "solar",   solar,   solar_plot,   10,     5,
-        "battery", battery, battery_plot, 11,     4
+        "solar",   solar,   solar_plot,   6.5,     5,
+        "battery", battery, battery_plot, 6.5,     4
     ) |>
     expand_grid(method = names(fit_methods)) |>
     mutate(fit = map2(data, method, fit_wrights_law))
