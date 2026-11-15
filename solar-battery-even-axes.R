@@ -91,7 +91,7 @@ battery_plot <-
         y = "Battery cell price\n(2024 US$/kWh)"
     )
 
-set.seed(1) # lmrob() starts from random subsamples
+set.seed(349) # lmrob() starts from random subsamples
 fits <-
     tribble(
         ~series,   ~data,   ~plot,        ~width, ~height,
