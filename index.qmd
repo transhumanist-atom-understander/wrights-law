@@ -73,7 +73,7 @@ Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulati
 ```{r}
 #| label: solar-wrights-law
 #| fig-width: 6.5
-#| fig-height: 4
+#| fig-height: 3.6
 #| fig-alt: "Log-log plot of solar module cost against cumulative capacity, with a fitted straight line sloping downwards. Orders of magnitude are the same size on both axes."
 fitted_plot("solar")
 ```

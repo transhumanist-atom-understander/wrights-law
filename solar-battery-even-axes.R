@@ -95,8 +95,8 @@ set.seed(349) # lmrob() starts from random subsamples
 fits <-
     tribble(
         ~series,   ~data,   ~plot,        ~width, ~height,
-        "solar",   solar,   solar_plot,   6.5,     5,
-        "battery", battery, battery_plot, 6.5,     4
+        "solar",   solar,   solar_plot,   6.5,     3.6,
+        "battery", battery, battery_plot, 6.5,     2.2
     ) |>
     expand_grid(method = names(fit_methods)) |>
     mutate(
