@@ -39,8 +39,7 @@ data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity)
 plotting the price of solar modules as a function of cumulative
 capacity:
 
-<img src="index_files/figure-commonmark/solar-wrights-law-1.png"
-data-fig-alt="Log-log plot of solar module cost against cumulative capacity, with a fitted straight line sloping downwards. Orders of magnitude are the same size on both axes." />
+![](https://res.cloudinary.com/lesswrong-2-0/image/upload/v1794805134/lexical_client_uploads/igaiuljobhz3clsljery.png)
 
 Of course the most impressive thing about this plot is the massive
 reduction in price, across multiple orders of magnitude. But notice
