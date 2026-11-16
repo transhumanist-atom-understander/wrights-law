@@ -102,6 +102,11 @@ In China, where they can build solar and battery factories, they can also build 
 The effort of starting the SMR industry from nothing seems massive, but producing many times more battery cells than have ever been produced is also a massive effort.
 Compare one massive effort to another, and imagine both happening in China, and I think it is not so clear which will be the better option for zero-carbon all-night power.
 
-I think this is what extrapolating the line should look like.
-The line tells you what it takes to achieve each price reduction.
-Look at the slope, and compare like to like in terms of investment and engineering effort.
+I do think solar and batteries will be massively scaled up, and I do think they will become much cheaper, more or less along the Wright's Law lines.
+But if efforts of the same scale are made in nuclear, I think it may be cost-competitive, even in this high solar world.
+
+# Conclusion
+
+You do greater honor to the god of straight lines on graphs when you look at the slope.
+When it's a Wright's Law fit, the slope tells us about the scale of investment and engineering efforts that accompany shifts in price.
+Don't assume the world will stand still, that no other efforts of the same scale will be made.
