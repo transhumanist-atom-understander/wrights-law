@@ -51,10 +51,11 @@ But comparing to nuclear, the same idea applies.
 It's not easy to build a nuclear plant.
 Europe's newest nuclear plant, the Flamanville reactor, was an absurd outlier in cost and time.
 But in Europe they can't seem to build battery factories either, as can see with [Northvolt](https://en.wikipedia.org/wiki/Northvolt).
-In China, where they can build solar and battery factories, they can also build nuclear plants, adding generation every year, though still outpaced by solar.
-They've also installed a prototype small modular reactor, and if they begin factory production, we could see price learning curves for nuclear too.
+In China, where they can build solar and battery factories, they can also build nuclear plants, [adding nuclear generation every year, though solar is growing far faster](https://ourworldindata.org/grapher/electricity-production-by-source?country=~CHN).
+[They've also installed a prototype small modular reactor](https://www.nucnet.org/news/hot-testing-begins-at-china-s-linglong-1-small-modular-reactor-10-3-2026), and if they begin factory production, we could see price learning curves for nuclear too.
 The effort of starting that industry from nothing seems massive, but producing far more battery cells than have ever been produced is also a massive effort.
 Compare one massive effort to another, and imagine both happening in China, and I think the outcome is not so clear.
 
 I think this is what extrapolating the line should look like.
 The line tells you what it takes to achieve each price reduction.
+Look at the slope, and compare like to like in terms of investment and engineering effort.
