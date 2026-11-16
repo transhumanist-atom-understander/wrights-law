@@ -1,5 +1,5 @@
 ---
-title: "Wright's law: how steep is the line?"
+title: "Learning curves are not that steep"
 format:
   html:
     embed-resources: true
@@ -39,7 +39,7 @@ Let's take for granted that the lines will remain straight, and we can predict t
 What we see on the graph is the massive effort required for each price decrease.
 In particular, I think that to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
 
-## Solar Wright's law plot
+## Solar learning curve
 
 Maybe you've seen this plot before, but let's take another look, emphasizing the massive scale of the effort required for each price decrease.
 
