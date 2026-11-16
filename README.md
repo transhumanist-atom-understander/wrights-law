@@ -1,20 +1,20 @@
 In 2024 I was posting about the astonishing progress in solar power.
 It was [the year of the big battery](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 People were telling me, first of all, that fossil fuels were obsolete for electricity generation.
-And second, for carbon-free electricity generation, that nuclear was no longer worthwile.
+And second, that for carbon-free electricity generation, nuclear was no longer worthwhile.
 
-I had been converted to a solar believer by the astonishing progress in batteries, but I was skeptical of the visions of Solartopia, where we run on solar all day and batteries all night.
+I had been converted to a solar believer by the progress in batteries, but I was skeptical of the visions of Solartopia, where we run on solar all day and batteries all night.
 I think my skepticism has aged well, as data centers install natural gas turbines and hyperscalers work to restart nuclear plants.
-But the basis of my skepticism then was that [batteries were being used for a specific niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
+But the basis of my skepticism then was that [batteries were being used for a specific niche, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 
-Of course, the astonishing price drops in both solar and batteries is what made us all into solar believers.
+Of course, the astonishing price drops in both solar and batteries are what made us all into solar believers.
 But what irritated me then was the framing that whether you believe in Solartopia is just a matter of whether you believe in straight lines on graphs.
 Scott Alexander reported on this perspective in his [Notes from a Progress Studies Conference](https://www.astralcodexten.com/p/notes-from-the-progress-studies-conference), for example.
 
 The problem with this is that the lines on the graphs are not actually that steep.
 Let's take for granted that the lines will remain straight, and we can predict the future by extrapolating with them.
 What we see on the graph is the massive effort required for each price decrease.
-I think in particular, to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
+In particular, I think that to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
 
 ## Solar Wright's law plot
 
@@ -24,7 +24,7 @@ Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulati
 
 
 Of course the most impressive thing about this plot is the massive reduction in price, across multiple orders of magnitude.
-But notice there's more orders of magnitude on the x axis than the y axis.
+But notice there are more orders of magnitude on the x-axis than on the y-axis.
 I've made sure that orders of magnitude are the same size on both axes, so we can get a visual sense of the relationship.
 
 The slope of the line fit is about -0.4.
@@ -36,7 +36,7 @@ So a 10x reduction in price would require producing 1000x as many solar panels a
 If the slope was -1/2, then a 10x reduction in price would require a 100x scale-up of production.
 As you can see, the denominator counts zeros.
 
-It's in between... with a slope of -0.4, a 10x reduction in price requires a scaleup of about 300x in cumulative capacity.
+It's in between: with a slope of -0.4, a 10x reduction in price requires a scale-up of about 300x in cumulative capacity.
 
 That's how hard people fought for every order of magnitude in price reduction.
 That's what I want you to keep in mind, when comparing solar to other technologies: that it will be cheaper once those massive efforts have been made.
@@ -50,7 +50,7 @@ What was new in 2024 was the boom in battery storage, driven by [a similar trend
 But comparing to nuclear, the same idea applies.
 It's not easy to build a nuclear plant.
 Europe's newest nuclear plant, the Flamanville reactor, was an absurd outlier in cost and time.
-But in Europe they can't seem to build battery factories either, as can see with [Northvolt](https://en.wikipedia.org/wiki/Northvolt).
+But in Europe they can't seem to build battery factories either, as we can see with [Northvolt](https://en.wikipedia.org/wiki/Northvolt).
 In China, where they can build solar and battery factories, they can also build nuclear plants, [adding nuclear generation every year, though solar is growing far faster](https://ourworldindata.org/grapher/electricity-production-by-source?country=~CHN).
 [They've also installed a prototype small modular reactor](https://www.nucnet.org/news/hot-testing-begins-at-china-s-linglong-1-small-modular-reactor-10-3-2026), and if they begin factory production, we could see price learning curves for nuclear too.
 The effort of starting that industry from nothing seems massive, but producing far more battery cells than have ever been produced is also a massive effort.
