@@ -1,8 +1,20 @@
-I'm addressing my fellow devotees of the god of straight lines on graphs, and I'm telling you to stop jumping to the end of the trend line.
-Just because solar and battery prices are decreasing doesn't mean we will inevitably use solar and battery for everything.
-When you look at the actual slope of the decrease, you'll see the massive efforts it takes to decrease the price.
-When you want to do futurism, you have to consider not only what will happen eventually holding everything else constant, but what will happen first.
-When you do that you'll see in particular that nuclear is not out of the game.
+In 2024 I was posting about the astonishing progress in solar power.
+It was [the year of the big battery](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
+People were telling me, first of all, that fossil fuels were obsolete for electricity generation.
+And second, for carbon-free electricity generation, that nuclear was no longer worthwile.
+
+I had been converted to a solar believer by the astonishing progress in batteries, but I was skeptical of the visions of Solartopia, where we run on solar all day and batteries all night.
+I think my skepticism has aged well, as data centers install natural gas turbines and hyperscalers work to restart nuclear plants.
+But the basis of my skepticism then was that [batteries were being used for a specific niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
+
+Of course, the astonishing price drops in both solar and batteries is what made us all into solar believers.
+But what irritated me then was the framing that whether you believe in Solartopia is just a matter of whether you believe in straight lines on graphs.
+Scott Alexander reported on this perspective in his [Notes from a Progress Studies Conference](https://www.astralcodexten.com/p/notes-from-the-progress-studies-conference), for example.
+
+The problem with this is that the lines on the graphs are not actually that steep.
+Let's take for granted that the lines will remain straight, and we can predict the future by extrapolating with them.
+What we see on the graph is the massive effort required for each price decrease.
+I think in particular, to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
 
 ## Solar Wright's law plot
 
