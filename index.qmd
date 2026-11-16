@@ -53,7 +53,7 @@ And second, that for carbon-free electricity generation, nuclear couldn't compet
 
 I had been converted to a solar believer by the growth of battery storage, but I was skeptical of the visions of Solartopia, where we run on solar all day and batteries all night.
 I think my skepticism has aged well, as data centers install natural gas turbines and hyperscalers work to restart nuclear plants.
-But the basis of my skepticism then was that [batteries were being used for a specific niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
+But the basis of my skepticism then was that [batteries were being installed for a niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 
 Of course, the astonishing price drops in both solar and batteries are what made us all into solar believers.
 The hot graph we were all reposting was a "learning curve", showing how price decreases as a function of cumulative production: how many watts of solar cells have ever been produced, or kWh of lithium-ion batteries.
@@ -108,5 +108,5 @@ But if efforts of the same scale are made in nuclear, I think it may be cost-com
 ## Conclusion
 
 You do greater honor to the god of straight lines on graphs when you look at the slope.
-When it's a Wright's law fit, the slope tells us about the scale of investment and engineering efforts that accompany shifts in price.
-Don't assume the world will stand still, that no other efforts of the same scale will be made.
+When it's a Wright's law fit, the slope tells us about the scale of production efforts that accompany reductions in price.
+When the slope is not steep, such efforts are massive, so consider the competition to be other efforts of the same scale.
