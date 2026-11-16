@@ -99,13 +99,13 @@ fits <-
         "battery", battery, battery_plot, 6.5,     4
     ) |>
     expand_grid(method = names(fit_methods)) |>
-    mutate(fit = map2(data, method, fit_wrights_law))
+    mutate(
+        fit = map2(data, method, fit_wrights_law),
+        plot = map2(plot, fit, \(plot, fit) plot + geom_fit(fit))
+    )
 
 fits |>
-    mutate(
-        filename = str_glue("{series}_wrights_law_{method}.png"),
-        plot = map2(plot, fit, \(plot, fit) plot + geom_fit(fit))
-    ) |>
+    mutate(filename = str_glue("{series}_wrights_law_{method}.png")) |>
     select(filename, plot, width, height) |>
     pwalk(ggsave)
 

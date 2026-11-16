@@ -1,3 +1,26 @@
+---
+title: "Wright's law: how steep is the line?"
+format:
+  html:
+    embed-resources: true
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+# Fetches the OWID data, fits the lines and builds the plots, leaving them in
+# `fits`. It also writes the PNGs and the parameter table, which are ignored.
+source("solar-battery-even-axes.R")
+
+fitted_plot <- function(series, method) {
+    fits$plot[[which(fits$series == series & fits$method == method)]]
+}
+```
+
 In 2024 I was posting about the astonishing progress in solar power.
 It was [the year of the big battery](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 People were telling me, first of all, that fossil fuels were obsolete for electricity generation.
@@ -22,6 +45,13 @@ Maybe you've seen this plot before, but let's take another look, emphasizing the
 
 Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity), plotting the price of solar power as a function of cumulative capacity:
 
+```{r}
+#| label: solar-wrights-law
+#| fig-width: 6.5
+#| fig-height: 4
+#| fig-alt: "Log-log plot of solar module cost against cumulative capacity, with a fitted straight line of slope about -0.4. Orders of magnitude are the same size on both axes."
+fitted_plot("solar", "robust")
+```
 
 Of course the most impressive thing about this plot is the massive reduction in price, across multiple orders of magnitude.
 But notice there are more orders of magnitude on the x-axis than on the y-axis.
