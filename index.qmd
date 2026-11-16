@@ -54,7 +54,7 @@ And second, that for carbon-free electricity generation, nuclear was no longer w
 
 I had been converted to a solar believer by the progress in batteries, but I was skeptical of the visions of Solartopia, where we run on solar all day and batteries all night.
 I think my skepticism has aged well, as data centers install natural gas turbines and hyperscalers work to restart nuclear plants.
-But the basis of my skepticism then was that [batteries were being used for a specific niche, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
+But the basis of my skepticism then was that [batteries were being used for a specific niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 
 Of course, the astonishing price drops in both solar and batteries are what made us all into solar believers.
 But what irritated me then was the framing that whether you believe in Solartopia is just a matter of whether you believe in straight lines on graphs.
@@ -63,7 +63,7 @@ Scott Alexander reported on this perspective in his [Notes from a Progress Studi
 The problem with this is that the lines on the graphs are not actually that steep.
 Let's take for granted that the lines will remain straight, and we can predict the future by extrapolating with them.
 What we see on the graph is the massive effort required for each price decrease.
-In particular, I think that to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
+I think in particular, to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
 
 ## Solar learning curve
 
