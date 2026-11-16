@@ -57,18 +57,19 @@ I think my skepticism has aged well, as data centers install natural gas turbine
 But the basis of my skepticism then was that [batteries were being used for a specific niche use, and that their price would have to drop substantially to escape that niche](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 
 Of course, the astonishing price drops in both solar and batteries are what made us all into solar believers.
-But what irritated me then was the framing that whether you believe in Solartopia is just a matter of whether you believe in straight lines on graphs.
-Scott Alexander reported on this perspective in his [Notes from a Progress Studies Conference](https://www.astralcodexten.com/p/notes-from-the-progress-studies-conference), for example.
+The graph of the moment was a "learning curve", showing how price decreases as a function of cumulative production: how many watts of solar cells have ever been produced, or kWh of lithium-ion batteries).
+[When such a "curve" is a straight line on a log-log plot, that's an instance of Wright's law](https://ourworldindata.org/learning-curve).
+[I have heard it said that Wright's law-based extrapolations are more reliable than extrapolations of Moore's law type](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0052669).
 
-The problem with this is that the lines on the graphs are not actually that steep.
-Let's take for granted that the lines will remain straight, and we can predict the future by extrapolating with them.
-What we see on the graph is the massive effort required for each price decrease.
-I think in particular, to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
+What irritated me about the discourse, though, was the prevalent idea that if you believed in extrapolating these lines, then you believed Solartopia was nigh: we would soon be running on solar all day and batteries all night, and all other energy technologies were dead ends.
+For some record that this idea was in the air, see Scott Alexander's [Notes from a Progress Studies Conference](https://www.astralcodexten.com/p/notes-from-the-progress-studies-conference).
+
+The problem with this is that the learning curves are not actually that steep.
+Even taking for granted that we can extrapolate the learning curve with a Wright's Law-style fit, what these graphs really show is the massive scale of the effort required for each price decrease.
 
 ## Solar learning curve
 
-Maybe you've seen this plot before, but let's take another look, emphasizing the massive scale of the effort required for each price decrease.
-
+Let's take another look at the Wright's Law learning curve for solar.
 Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity), plotting the price of solar power as a function of cumulative capacity:
 
 ```{r}
@@ -84,33 +85,24 @@ But notice there are more orders of magnitude on the x-axis than on the y-axis.
 I've made sure that orders of magnitude are the same size on both axes, so we can get a visual sense of the relationship.
 
 The slope of the line fit is about `r slope_text(solar_slope)`.
-This would be very simple to interpret if it was -1/3 or -1/2, but it's annoyingly in between.
-If it was -1/3, that would mean that on the plot, you would move three boxes to the right to go down a box.
-Meaning, three orders of magnitude of scale-up to achieve one order of magnitude price reduction.
-So a 10x reduction in price would require producing 1000x as many solar panels as have ever been produced.
-
-If the slope was -1/2, then a 10x reduction in price would require a 100x scale-up of production.
-As you can see, the denominator counts zeros.
-
-It's in between: with a slope of `r slope_text(solar_slope)`, a 10x reduction in price requires a scale-up of about `r scale_up_text(solar_slope)`x in cumulative capacity.
-
+This means a 10x reduction in price requires a scale-up of about `r scale_up_text(solar_slope)`x in cumulative capacity.
 That's how hard people fought for every order of magnitude in price reduction.
-That's what I want you to keep in mind, when comparing solar to other technologies: that it will be cheaper once those massive efforts have been made.
-But the rest of the world does not stand still, and massive efforts will be made on other technologies as well.
 
 ## Reconsidering solar vs nuclear
 
 Solar is already so cheap that we would be using it for everything if we could easily store and transmit it.
 What was new in 2024 was the boom in battery storage, driven by [a similar trend for batteries](https://ourworldindata.org/grapher/battery-price-vs-cumulative-production).
+Batteries will be much cheaper too, once more factories are built, and have produced many times more battery capacity than has ever existed.
+Eventually they will be cheap enough that it's economical to discharge batteries all night at current electricity prices.
 
-But comparing to nuclear, the same idea applies.
+But let's reconsider the comparison to nuclear, keeping in mind the massive investment and engineering effort that such a battery scale-up involves.
 It's not easy to build a nuclear plant.
-Europe's newest nuclear plant, the Flamanville reactor, was an absurd outlier in cost and time.
+Europe's newest nuclear plant, the Flamanville reactor, was a particular embarassment to nuclear, getting far behind schedule and over budget.
 But in Europe they can't seem to build battery factories either, as we can see with [Northvolt](https://en.wikipedia.org/wiki/Northvolt).
 In China, where they can build solar and battery factories, they can also build nuclear plants, [adding nuclear generation every year, though solar is growing far faster](https://ourworldindata.org/grapher/electricity-production-by-source?country=~CHN).
-[They've also installed a prototype small modular reactor](https://www.nucnet.org/news/hot-testing-begins-at-china-s-linglong-1-small-modular-reactor-10-3-2026), and if they begin factory production, we could see price learning curves for nuclear too.
-The effort of starting that industry from nothing seems massive, but producing far more battery cells than have ever been produced is also a massive effort.
-Compare one massive effort to another, and imagine both happening in China, and I think the outcome is not so clear.
+[China also has a small nuclear reactor](https://www.nucnet.org/news/hot-testing-begins-at-china-s-linglong-1-small-modular-reactor-10-3-2026), and if they begin factory production of SMRs, we could see price learning curves for nuclear too.
+The effort of starting the SMR industry from nothing seems massive, but producing many times more battery cells than have ever been produced is also a massive effort.
+Compare one massive effort to another, and imagine both happening in China, and I think it is not so clear which will be the better option for zero-carbon all-night power.
 
 I think this is what extrapolating the line should look like.
 The line tells you what it takes to achieve each price reduction.
