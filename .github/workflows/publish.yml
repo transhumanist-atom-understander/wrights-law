@@ -49,7 +49,7 @@ jobs:
       # LessWrong hosts.
       - name: Render markdown
         env:
-          FIGURE: "![](https://res.cloudinary.com/lesswrong-2-0/image/upload/v1794805134/lexical_client_uploads/igaiuljobhz3clsljery.png)"
+          FIGURE: "![](https://res.cloudinary.com/lesswrong-2-0/image/upload/v1794808276/lexical_client_uploads/jzd7qn35oabs0dlfb5a3.png)"
         run: |
           quarto render index.qmd --to gfm --output-dir _markdown -M title:false
           sed '/./,$!d' _markdown/index.md |
