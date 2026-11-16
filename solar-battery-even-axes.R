@@ -10,9 +10,8 @@ theme_set(theme_grey(base_size = 12))
 
 decimal_labels <- label_comma(drop0trailing = TRUE)
 
-decade_breaks <- function(x) {
-    10^seq(floor(log10(min(x))), ceiling(log10(max(x))))
-}
+# One break per order of magnitude; a scale ignores those outside its range
+decades <- 10^(-9:9)
 
 # Robust linear regression is my go-to, but least squares is more standard. It
 # doesn't seem to matter for photovoltaic, but for batteries, it matters a lot,
@@ -25,8 +24,15 @@ fit_wrights_law <- function(data, method) {
     fit(log10(price) ~ log10(cumulative_production), data = data)
 }
 
+# geom_abline() takes its line in the units of the scales, so log10 here. Unlike
+# a line through the fitted values, it doesn't stretch the axes where the fit
+# overshoots the data, as it does for the early years of batteries
 geom_fit <- function(fit) {
-    geom_line(aes(y = 10^fitted(fit)), linewidth = 1)
+    geom_abline(
+        intercept = coef(fit)[[1]],
+        slope = coef(fit)[[2]],
+        linewidth = 1
+    )
 }
 
 # A blank label draws nothing, but its point still pushes the other labels away,
@@ -41,21 +47,18 @@ plot_wrights_law <- function(data) {
         geom_text_repel(
             aes(label = label_every_fifth_year(year)),
             # Start the labels a third of a decade below and to the left of
-            # their points, where a falling trend leaves room
+            # their points, where a falling trend leaves room. The axes extend
+            # that far past the data to fit them
             nudge_x = -0.35,
             nudge_y = -0.35,
             min.segment.length = 0,
             max.overlaps = Inf,
             max.time = Inf
         ) +
-        scale_x_log10(breaks = decade_breaks, labels = decimal_labels) +
-        scale_y_log10(breaks = decade_breaks, labels = decimal_labels) +
-        coord_fixed(
-            xlim = range(decade_breaks(data$cumulative_production)),
-            ylim = range(decade_breaks(data$price)),
-            expand = FALSE
-        ) +
-        guides(x = guide_axis(angle = 45)) +
+        scale_x_log10(breaks = decades, labels = decimal_labels) +
+        scale_y_log10(breaks = decades, labels = decimal_labels) +
+        # Orders of magnitude are the same size on both axes
+        coord_fixed() +
         theme(panel.grid.minor = element_blank())
 }
 
@@ -95,7 +98,7 @@ set.seed(349) # lmrob() starts from random subsamples
 fits <-
     tribble(
         ~series,   ~data,   ~plot,        ~width, ~height,
-        "solar",   solar,   solar_plot,   6.5,     3.6,
+        "solar",   solar,   solar_plot,   6.5,     3.3,
         "battery", battery, battery_plot, 6.5,     2.2
     ) |>
     expand_grid(method = names(fit_methods)) |>
