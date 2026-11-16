@@ -1,3 +1,52 @@
+---
+title: "Learning curves are not that steep"
+format:
+  html:
+    embed-resources: true
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+# Fetches the OWID data, fits the lines and builds the plots, leaving them in
+# `fits`. It also writes the PNGs and the parameter table, which are ignored.
+source("solar-battery-even-axes.R")
+
+# The fit the article shows and quotes
+article_method <- "robust"
+
+fitted_plot <- function(series) {
+    fits$plot[[which(fits$series == series & fits$method == article_method)]]
+}
+
+fit_parameters <- read_csv("line_fit_parameters.csv", show_col_types = FALSE)
+
+fitted_slope <- function(series) {
+    fit_parameters |>
+        filter(
+            .data$series == .env$series,
+            method == article_method,
+            term != "(Intercept)"
+        ) |>
+        pull(estimate)
+}
+
+solar_slope <- fitted_slope("solar")
+
+# One decimal place: the two fitting methods disagree in the second
+slope_text <- function(slope) format(round(slope, 1), nsmall = 1)
+
+# How much cumulative production has to grow for the price to fall 10x, to one
+# significant figure, which is all the uncertainty in the slope supports
+scale_up_text <- function(slope) {
+    format(signif(10^(-1 / slope), 1), big.mark = ",", scientific = FALSE)
+}
+```
+
 In 2024 I was posting about the astonishing progress in solar power.
 It was [the year of the big battery](https://www.lesswrong.com/posts/mnaEgW9JgiochnES2/2024-was-the-year-of-the-big-battery-and-what-that-means-for).
 People were telling me, first of all, that fossil fuels were obsolete for electricity generation.
@@ -16,18 +65,25 @@ Let's take for granted that the lines will remain straight, and we can predict t
 What we see on the graph is the massive effort required for each price decrease.
 I think in particular, to understand the future of solar and nuclear energy, we need to consider the consequences of similar efforts being made for nuclear.
 
-## Solar Wright's law plot
+## Solar learning curve
 
 Maybe you've seen this plot before, but let's take another look, emphasizing the massive scale of the effort required for each price decrease.
 
 Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity), plotting the price of solar power as a function of cumulative capacity:
 
+```{r}
+#| label: solar-wrights-law
+#| fig-width: 6.5
+#| fig-height: 4
+#| fig-alt: "Log-log plot of solar module cost against cumulative capacity, with a fitted straight line sloping downwards. Orders of magnitude are the same size on both axes."
+fitted_plot("solar")
+```
 
 Of course the most impressive thing about this plot is the massive reduction in price, across multiple orders of magnitude.
 But notice there are more orders of magnitude on the x-axis than on the y-axis.
 I've made sure that orders of magnitude are the same size on both axes, so we can get a visual sense of the relationship.
 
-The slope of the line fit is about -0.4.
+The slope of the line fit is about `r slope_text(solar_slope)`.
 This would be very simple to interpret if it was -1/3 or -1/2, but it's annoyingly in between.
 If it was -1/3, that would mean that on the plot, you would move three boxes to the right to go down a box.
 Meaning, three orders of magnitude of scale-up to achieve one order of magnitude price reduction.
@@ -36,7 +92,7 @@ So a 10x reduction in price would require producing 1000x as many solar panels a
 If the slope was -1/2, then a 10x reduction in price would require a 100x scale-up of production.
 As you can see, the denominator counts zeros.
 
-It's in between: with a slope of -0.4, a 10x reduction in price requires a scale-up of about 300x in cumulative capacity.
+It's in between: with a slope of `r slope_text(solar_slope)`, a 10x reduction in price requires a scale-up of about `r scale_up_text(solar_slope)`x in cumulative capacity.
 
 That's how hard people fought for every order of magnitude in price reduction.
 That's what I want you to keep in mind, when comparing solar to other technologies: that it will be cheaper once those massive efforts have been made.
