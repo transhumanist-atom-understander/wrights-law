@@ -14,6 +14,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
 
@@ -41,6 +43,27 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+
+      # Plain markdown copy of the article, without the title. Rendered into
+      # its own directory so that the figures stay out of the repository,
+      # which leaves the image links in index.md broken.
+      - name: Render markdown
+        run: |
+          quarto render index.qmd --to gfm --output-dir _markdown -M title:false
+          sed '/./,$!d' _markdown/index.md > index.md
+
+      # Pushes made with GITHUB_TOKEN do not start another workflow run
+      - name: Commit markdown
+        run: |
+          git add index.md
+          if git diff --cached --quiet; then
+            echo "index.md is unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Render index.md"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
   deploy:
     if: github.ref == 'refs/heads/main'
