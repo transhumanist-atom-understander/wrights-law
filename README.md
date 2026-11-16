@@ -18,8 +18,7 @@ I think in particular, to understand the future of solar and nuclear energy, we 
 
 ## Solar Wright's law plot
 
-I'm going to post a plot you may have seen before, of the massive reduction in the price of solar power.
-But I'm going to emphasize the massive scale of the effort required.
+Maybe you've seen this plot before, but let's take another look, emphasizing the massive scale of the effort required for each price decrease.
 
 Using [OWID data](https://ourworldindata.org/grapher/solar-pv-prices-vs-cumulative-capacity), plotting the price of solar power as a function of cumulative capacity:
 
@@ -43,9 +42,19 @@ That's how hard people fought for every order of magnitude in price reduction.
 That's what I want you to keep in mind, when comparing solar to other technologies: that it will be cheaper once those massive efforts have been made.
 But the rest of the world does not stand still, and massive efforts will be made on other technologies as well.
 
-## Battery Wright's law plot
+## Reconsidering solar vs nuclear
 
 Solar is already so cheap that we would be using it for everything if we could easily store and transmit it.
-What has really unlocked a solar revolution in recent years is not just solar but batteries.
+What was new in 2024 was the boom in battery storage, driven by [a similar trend for batteries](https://ourworldindata.org/grapher/battery-price-vs-cumulative-production).
 
+But comparing to nuclear, the same idea applies.
+It's not easy to build a nuclear plant.
+Europe's newest nuclear plant, the Flamanville reactor, was an absurd outlier in cost and time.
+But in Europe they can't seem to build battery factories either, as can see with [Northvolt](https://en.wikipedia.org/wiki/Northvolt).
+In China, where they can build solar and battery factories, they can also build nuclear plants, adding generation every year, though still outpaced by solar.
+They've also installed a prototype small modular reactor, and if they begin factory production, we could see price learning curves for nuclear too.
+The effort of starting that industry from nothing seems massive, but producing far more battery cells than have ever been produced is also a massive effort.
+Compare one massive effort to another, and imagine both happening in China, and I think the outcome is not so clear.
 
+I think this is what extrapolating the line should look like.
+The line tells you what it takes to achieve each price reduction.
