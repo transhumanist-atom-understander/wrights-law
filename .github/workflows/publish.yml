@@ -44,13 +44,16 @@ jobs:
         with:
           path: _site
 
-      # Plain markdown copy of the article, without the title. Rendered into
-      # its own directory so that the figures stay out of the repository,
-      # which leaves the image links in index.md broken.
+      # Plain markdown copy of the article, matching what is in the LessWrong
+      # Markdown editor: no title, and the figure replaced by the copy that
+      # LessWrong hosts.
       - name: Render markdown
+        env:
+          FIGURE: "![](https://res.cloudinary.com/lesswrong-2-0/image/upload/v1794808276/lexical_client_uploads/jzd7qn35oabs0dlfb5a3.png)"
         run: |
           quarto render index.qmd --to gfm --output-dir _markdown -M title:false
-          sed '/./,$!d' _markdown/index.md > index.md
+          sed '/./,$!d' _markdown/index.md |
+            perl -0pe '$n = s/<img\b.*?\/>/$ENV{FIGURE}/s; END { exit($n == 1 ? 0 : 1) }' > index.md
 
       # Pushes made with GITHUB_TOKEN do not start another workflow run
       - name: Commit markdown
