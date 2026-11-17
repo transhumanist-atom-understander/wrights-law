@@ -87,7 +87,7 @@ all-night power.
 I do think solar and batteries will be massively scaled up, and I do
 think they will become much cheaper, more or less along the Wright’s law
 lines. But if efforts of the same scale are made in nuclear, I think it
-may be cost-competitive, even in this high-solar world.
+may be cost-competitive, even in such a high-solar world.
 
 ## Conclusion
 
